@@ -3,7 +3,8 @@ const form = document.querySelector('form');
 form.addEventListener('submit', (e) => {
 	//if (!isText('userid', 5)) e.preventDefault();
 	//if (!isText('comments', 10)) e.preventDefault();
-	if (!isPwd('pwd1', 'pwd2', 5)) e.preventDefault();
+	// if (!isPwd('pwd1', 'pwd2', 5)) e.preventDefault();
+	if (!isSelect('edu')) e.preventDefault();
 });
 
 //텍스트값 입력 인증로직 함수
@@ -29,6 +30,18 @@ function isPwd(name1, name2, len) {
 	//비밀번호의 글자값이 len보다 적거나 혹은 비번에 숫자가 없거나
 	if (pwd1.length < len || !num.test(pwd1) || !eng.test(pwd1) || !spc.test(pwd1) || pwd1 !== pwd2) {
 		alert(`비밀번호는 ${len}글자이상, 특수문자, 숫자, 문자를 모두 포함해야 하고 두개의 비밀번호가 같아야 합니다.`);
+		return false;
+	} else {
+		return true;
+	}
+}
+
+// select 인증로직 함수
+function isSelect(name) {
+	const input = form.querySelector(`[name=${name}]`).value;
+
+	if (!input) {
+		alert(`학력을 선택해주세요.`);
 		return false;
 	} else {
 		return true;

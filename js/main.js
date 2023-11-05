@@ -4,7 +4,9 @@ form.addEventListener('submit', (e) => {
 	//if (!isText('userid', 5)) e.preventDefault();
 	//if (!isText('comments', 10)) e.preventDefault();
 	// if (!isPwd('pwd1', 'pwd2', 5)) e.preventDefault();
-	if (!isSelect('edu')) e.preventDefault();
+	// if (!isSelect('edu')) e.preventDefault();
+	// if (!isGender('gender')) e.preventDefault();
+	if (!isEmail('email')) e.preventDefault();
 });
 
 //텍스트값 입력 인증로직 함수
@@ -45,6 +47,45 @@ function isSelect(name) {
 		return false;
 	} else {
 		return true;
+	}
+}
+
+// gender 인증로직 함수
+// function isGender(name) {
+// 	const radio = form.querySelectorAll(`[name=${name}]`).value;
+
+// 	if (!radio) {
+// 		alert(`성별을 선택해주세요`);
+// 		return false;
+// 	} else {
+// 		return true;
+// 	}
+// }
+
+//email 인증로직 함수
+function isEmail(name) {
+	const input = form.querySelector(`[name=${name}]`).value;
+
+	if (!/@/.test(input)) {
+		alert('@가 포함되어야 합니다.');
+		return false;
+	} else {
+		if (!input.split('@')[0] || !input.split('@')[1]) {
+			alert('@앞뒤로 문자값이 있어야 됩니다.');
+			return false;
+		} else {
+			if (!/\./.test(input.split('@')[1])) {
+				alert('이메일주소에 .이 있어야 됩니다.');
+				return false;
+			} else {
+				if (!input.split('.')[0] || !input.split('.')[1]) {
+					alert('.앞뒤로 문자값이 있어야 됩니다.');
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
 	}
 }
 

@@ -20,6 +20,7 @@ function isText(name, len) {
 		showErr(name);
 		return false;
 	} else {
+		removeErr(name);
 		return true;
 	}
 }
@@ -39,6 +40,8 @@ function isPwd(name1, name2, len) {
 		showErr(name2);
 		return false;
 	} else {
+		removeErr(name1);
+		removeErr(name2);
 		return true;
 	}
 }
@@ -52,6 +55,7 @@ function isSelect(name) {
 		showErr(name);
 		return false;
 	} else {
+		removeErr(name);
 		return true;
 	}
 }
@@ -80,6 +84,7 @@ function isEmail(name) {
 					showErr(name);
 					return false;
 				} else {
+					removeErr(name);
 					return true;
 				}
 			}
@@ -97,12 +102,14 @@ function isCheck(name) {
 		showErr(name);
 		return false;
 	} else {
+		removeErr(name);
 		return true;
 	}
 }
 
 //에러구문 출력함수
 function showErr(name) {
+	removeErr(name);
 	const el = form.querySelector(`[name=${name}]`);
 	const parentEl = el.closest('td');
 	let errs = '';
@@ -110,6 +117,13 @@ function showErr(name) {
 	const errEl = document.createElement('p');
 	errEl.innerText = errs;
 	parentEl.append(errEl);
+}
+
+function removeErr(name) {
+	const el = form.querySelector(`[name=${name}]`);
+	const parentEl = el.closest('td');
+	const prevErrEl = parentEl.querySelector('p');
+	prevErrEl && prevErrEl.remove();
 }
 
 /*
